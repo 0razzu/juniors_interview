@@ -33,3 +33,31 @@ class TestTask3(unittest.TestCase):
                         'tutor': [1594692017, 1594692066, 1594692068, 1594696341]}),
             3565,
         )
+
+    def test_invalid_ints_missing_key(self):
+        with self.assertRaises(ValueError):
+            appearance({'lesson': [1594692000, 1594695600]})
+        with self.assertRaises(ValueError):
+            appearance({'lesson': [1594692000, 1594695600], 'pupil': [1594692033, 1594696347]})
+        with self.assertRaises(ValueError):
+            appearance({'lesson': [1594692000, 1594695600], 'tutor': [1594692033, 1594696347]})
+        with self.assertRaises(ValueError):
+            appearance({'pupil': [1594692000, 1594695600], 'tutor': [1594692033, 1594696347]})
+
+    def test_invalid_ints_incorrect_len(self):
+        with self.assertRaises(ValueError):
+            appearance({'lesson': [1594695600],
+                        'pupil': [1594692033, 1594696347],
+                        'tutor': [1594692017, 1594692066, 1594692068, 1594696341]})
+        with self.assertRaises(ValueError):
+            appearance({'lesson': [1594692000, 1594695600, 1594695601],
+                        'pupil': [1594692033, 1594696347],
+                        'tutor': [1594692017, 1594692066, 1594692068, 1594696341]})
+        with self.assertRaises(ValueError):
+            appearance({'lesson': [1594692000, 1594695600],
+                        'pupil': [1594692033, 1594692040, 1594696347],
+                        'tutor': [1594692017, 1594692066, 1594692068, 1594696341]})
+        with self.assertRaises(ValueError):
+            appearance({'lesson': [1594692000, 1594695600],
+                        'pupil': [1594692033, 1594696347],
+                        'tutor': [1594692017, 1594692066, 1594692068, 1594696341, 1594696348]})
